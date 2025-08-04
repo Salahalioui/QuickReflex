@@ -24,8 +24,8 @@ export function calculateSessionStats(results: TestResult[]) {
 
   return {
     average: Math.round(average),
-    best,
-    worst,
+    best: Math.round(best),
+    worst: Math.round(worst),
     consistency: Math.round(consistency)
   };
 }
@@ -63,7 +63,7 @@ export function updatePersonalBest(
 export function exportToCSV(session: TestSession): void {
   const csvContent = [
     'trial_number,reaction_time_ms',
-    ...session.results.map((result, index) => `${index + 1},${result.reactionTime}`)
+    ...session.results.map((result, index) => `${index + 1},${Math.round(result.reactionTime)}`)
   ].join('\n');
 
   const blob = new Blob([csvContent], { type: 'text/csv' });

@@ -93,7 +93,7 @@ export function ResultsPage({ session, onTestAgain, onBackToHome }: ResultsPageP
                   </div>
                   <div className="text-sm text-secondary">Trial {index + 1}</div>
                 </div>
-                <div className="text-lg font-semibold">{result.reactionTime}ms</div>
+                <div className="text-lg font-semibold">{Math.round(result.reactionTime)}ms</div>
               </div>
             ))}
           </div>
