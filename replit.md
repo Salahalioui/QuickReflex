@@ -2,7 +2,7 @@
 
 ## Overview
 
-This is a React-based reaction time testing application that measures user reflexes through visual and auditory stimuli. The application allows users to test their reaction times, track personal bests, view detailed statistics, and manage test settings. It features a modern dark theme UI built with Tailwind CSS and shadcn/ui components, with data persistence through local storage.
+This is a mobile-first React-based reaction time testing application that measures user reflexes through visual and auditory stimuli. The application allows users to test their reaction times with configurable trials (3/5/10), track personal bests, export results as CSV, and share via Web Share API. It features a modern dark theme UI with electric blue and vibrant green accent colors, built with Tailwind CSS and shadcn/ui components, with complete data persistence through local storage.
 
 ## User Preferences
 
