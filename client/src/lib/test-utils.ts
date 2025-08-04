@@ -31,14 +31,44 @@ export function calculateSessionStats(results: TestResult[]) {
 }
 
 export function getPerformanceRating(reactionTime: number, type: 'visual' | 'auditory'): string {
+  // Evidence-based thresholds from volleyball research
+  // Visual: Female setters avg 236ms, spikers avg 222ms
+  // Auditory: Female setters avg 200ms, spikers avg 199ms
   const thresholds = type === 'visual' 
-    ? { excellent: 200, good: 250, fair: 300 }
-    : { excellent: 150, good: 200, fair: 250 };
+    ? { excellent: 220, good: 250, fair: 300 }  // Based on elite volleyball data
+    : { excellent: 180, good: 220, fair: 280 }; // Auditory advantage reflected
 
-  if (reactionTime <= thresholds.excellent) return 'Excellent';
-  if (reactionTime <= thresholds.good) return 'Good';
-  if (reactionTime <= thresholds.fair) return 'Fair';
-  return 'Needs Practice';
+  if (reactionTime <= thresholds.excellent) return 'Elite Level';
+  if (reactionTime <= thresholds.good) return 'Competitive';
+  if (reactionTime <= thresholds.fair) return 'Recreational';
+  return 'Needs Training';
+}
+
+export function getPerformanceColor(reactionTime: number, type: 'visual' | 'auditory'): string {
+  const thresholds = type === 'visual' 
+    ? { excellent: 220, good: 250, fair: 300 }
+    : { excellent: 180, good: 220, fair: 280 };
+
+  if (reactionTime <= thresholds.excellent) return 'text-green-400';
+  if (reactionTime <= thresholds.good) return 'text-yellow-400';
+  if (reactionTime <= thresholds.fair) return 'text-orange-400';
+  return 'text-red-400';
+}
+
+export function getPerformanceInsight(reactionTime: number, type: 'visual' | 'auditory'): string {
+  const rating = getPerformanceRating(reactionTime, type);
+  const typeText = type === 'visual' ? 'visual' : 'auditory';
+  
+  switch (rating) {
+    case 'Elite Level':
+      return `Outstanding ${typeText} reaction time! You're performing at elite athlete levels.`;
+    case 'Competitive':
+      return `Strong ${typeText} reaction time. You're in the competitive range.`;
+    case 'Recreational':
+      return `Good ${typeText} reaction time for recreational play. Room for improvement.`;
+    default:
+      return `Your ${typeText} reaction time has significant room for improvement with training.`;
+  }
 }
 
 export function updatePersonalBest(

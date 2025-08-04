@@ -10,6 +10,7 @@ import NotFound from "@/pages/not-found";
 import { HomePage } from '@/pages/home';
 import { TestPage } from '@/pages/test';
 import { ResultsPage } from '@/pages/results';
+import { SciencePage } from '@/pages/science';
 import { SettingsModal } from '@/components/settings-modal';
 import { useLocalStorage } from '@/hooks/use-local-storage';
 import { TestType, TestSession, TestSettings, PersonalBest, TrialData, TestResult } from '@/types/test';
@@ -27,7 +28,7 @@ const defaultPersonalBest: PersonalBest = {
 };
 
 function Router() {
-  const [currentView, setCurrentView] = useState<'home' | 'test' | 'results'>('home');
+  const [currentView, setCurrentView] = useState<'home' | 'test' | 'results' | 'science'>('home');
   const [currentTestType, setCurrentTestType] = useState<TestType>('visual');
   const [currentSession, setCurrentSession] = useState<TestSession | null>(null);
   const [showSettings, setShowSettings] = useState(false);
@@ -99,6 +100,14 @@ function Router() {
     console.log('View all results');
   };
 
+  const handleViewScience = () => {
+    setCurrentView('science');
+  };
+
+  const handleBackFromScience = () => {
+    setCurrentView('home');
+  };
+
   return (
     <div className="min-h-screen flex flex-col">
       {/* Header */}
@@ -125,6 +134,7 @@ function Router() {
             recentSessions={sessions}
             onStartTest={handleStartTest}
             onViewAllResults={handleViewAllResults}
+            onViewScience={handleViewScience}
           />
         )}
         
@@ -142,6 +152,12 @@ function Router() {
             session={currentSession}
             onTestAgain={handleTestAgain}
             onBackToHome={handleBackToHome}
+          />
+        )}
+        
+        {currentView === 'science' && (
+          <SciencePage
+            onBack={handleBackFromScience}
           />
         )}
       </main>

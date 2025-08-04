@@ -1,8 +1,9 @@
-import { Trophy, Download, Share, RotateCcw, Home } from 'lucide-react';
+import { Trophy, Download, Share, RotateCcw, Home, Brain } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
+import { Badge } from '@/components/ui/badge';
 import { TestSession } from '@/types/test';
-import { exportToCSV, shareResults } from '@/lib/test-utils';
+import { exportToCSV, shareResults, getPerformanceRating, getPerformanceColor, getPerformanceInsight } from '@/lib/test-utils';
 
 interface ResultsPageProps {
   session: TestSession;
@@ -47,10 +48,16 @@ export function ResultsPage({ session, onTestAgain, onBackToHome }: ResultsPageP
             <div data-testid="text-session-average" className="text-4xl font-bold electric-blue mb-1">
               {session.average}ms
             </div>
-            <div className="text-secondary">Average Reaction Time</div>
+            <div className="text-secondary mb-3">Average Reaction Time</div>
+            <Badge 
+              variant="outline" 
+              className={`${getPerformanceColor(session.average, session.type)} border-current`}
+            >
+              {getPerformanceRating(session.average, session.type)}
+            </Badge>
           </div>
           
-          <div className="grid grid-cols-3 gap-4 text-center">
+          <div className="grid grid-cols-3 gap-4 text-center mb-4">
             <div>
               <div data-testid="text-best-time" className="text-lg font-semibold text-green-400">
                 {session.best}ms
@@ -71,6 +78,12 @@ export function ResultsPage({ session, onTestAgain, onBackToHome }: ResultsPageP
                 {session.consistency}%
               </div>
               <div className="text-xs text-secondary">Consistency</div>
+            </div>
+          </div>
+          
+          <div className="bg-dark-elevated rounded-lg p-3">
+            <div className="text-sm text-secondary text-center">
+              {getPerformanceInsight(session.average, session.type)}
             </div>
           </div>
         </CardContent>

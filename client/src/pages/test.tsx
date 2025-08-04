@@ -4,7 +4,7 @@ import { Button } from '@/components/ui/button';
 import { Progress } from '@/components/ui/progress';
 import { TestType, TestState, TrialData, TestSettings } from '@/types/test';
 import { useAudio } from '@/hooks/use-audio';
-import { generateRandomDelay, getPerformanceRating } from '@/lib/test-utils';
+import { generateRandomDelay, getPerformanceRating, getPerformanceColor, getPerformanceInsight } from '@/lib/test-utils';
 
 interface TestPageProps {
   testType: TestType;
@@ -227,15 +227,18 @@ export function TestPage({ testType, settings, onComplete, onExit }: TestPagePro
             <div className="text-secondary mb-8">Reaction Time</div>
             
             {/* Performance Indicator */}
-            <div className="bg-dark-surface rounded-lg p-4 mb-6 w-full max-w-xs">
-              <div className="flex items-center justify-between text-sm">
+            <div className="bg-dark-surface rounded-lg p-4 mb-6 w-full max-w-sm">
+              <div className="flex items-center justify-between text-sm mb-2">
                 <span className="text-secondary">Performance</span>
                 <span
                   data-testid="text-performance"
-                  className="font-semibold text-green-400"
+                  className={`font-semibold ${getPerformanceColor(trialData.reactionTime, testType)}`}
                 >
                   {getPerformanceRating(trialData.reactionTime, testType)}
                 </span>
+              </div>
+              <div className="text-xs text-secondary">
+                {getPerformanceInsight(trialData.reactionTime, testType)}
               </div>
             </div>
 
