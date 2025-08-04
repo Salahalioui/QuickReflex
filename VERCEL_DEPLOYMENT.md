@@ -112,6 +112,27 @@ Vercel automatically provides:
 
 ## Troubleshooting Common Issues
 
+### 404 NOT_FOUND Error
+If you get a 404 error after deployment:
+
+1. **Check Build Logs**: Look for warnings about unused build settings
+2. **Update vercel.json**: The corrected configuration should use:
+   ```json
+   {
+     "buildCommand": "vite build",
+     "outputDirectory": "dist",
+     "installCommand": "npm install",
+     "framework": null,
+     "rewrites": [
+       {
+         "source": "/(.*)",
+         "destination": "/index.html"
+       }
+     ]
+   }
+   ```
+3. **Redeploy**: Push the updated vercel.json to trigger a new deployment
+
 ### Build Failures
 - Check build logs in Vercel dashboard
 - Ensure all dependencies are in `package.json`
