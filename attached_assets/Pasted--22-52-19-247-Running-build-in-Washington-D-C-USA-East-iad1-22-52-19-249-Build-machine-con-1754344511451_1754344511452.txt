@@ -1,0 +1,43 @@
+[22:52:19.247] Running build in Washington, D.C., USA (East) – iad1
+[22:52:19.249] Build machine configuration: 2 cores, 8 GB
+[22:52:19.293] Cloning github.com/Salahalioui/QuickReflex (Branch: main, Commit: 7a32eb2)
+[22:52:19.861] Cloning completed: 568.000ms
+[22:52:20.018] Restored build cache from previous deployment (7GGNy4A9jHWuqw2JhHWVK8iFYgwB)
+[22:52:21.842] Running "vercel build"
+[22:52:22.323] Vercel CLI 44.6.4
+[22:52:23.039] Running "install" command: `npm install`...
+[22:52:27.816] npm warn deprecated @esbuild-kit/esm-loader@2.6.5: Merged into tsx: https://tsx.is
+[22:52:27.828] npm warn deprecated @esbuild-kit/core-utils@3.3.2: Merged into tsx: https://tsx.is
+[22:52:33.694] 
+[22:52:33.695] added 482 packages, and audited 483 packages in 10s
+[22:52:33.695] 
+[22:52:33.695] 65 packages are looking for funding
+[22:52:33.696]   run `npm fund` for details
+[22:52:33.731] 
+[22:52:33.732] 11 vulnerabilities (3 low, 8 moderate)
+[22:52:33.732] 
+[22:52:33.733] To address issues that do not require attention, run:
+[22:52:33.733]   npm audit fix
+[22:52:33.733] 
+[22:52:33.733] To address all issues (including breaking changes), run:
+[22:52:33.733]   npm audit fix --force
+[22:52:33.734] 
+[22:52:33.734] Run `npm audit` for details.
+[22:52:34.539] [36mvite v5.4.19 [32mbuilding for production...[36m[39m
+[22:52:34.590] transforming...
+[22:52:34.879] Browserslist: browsers data (caniuse-lite) is 10 months old. Please run:
+[22:52:34.881]   npx update-browserslist-db@latest
+[22:52:34.881]   Why you should do it regularly: https://github.com/browserslist/update-db#readme
+[22:52:38.814] [32m✓[39m 1727 modules transformed.
+[22:52:39.081] rendering chunks...
+[22:52:39.090] computing gzip size...
+[22:52:39.106] [2m../dist/public/[22m[32mindex.html                 [39m[1m[2m  1.30 kB[22m[1m[22m[2m │ gzip:   0.63 kB[22m
+[22:52:39.106] [2m../dist/public/[22m[2massets/[22m[35mindex-CbBbGNZp.css  [39m[1m[2m 59.38 kB[22m[1m[22m[2m │ gzip:  10.55 kB[22m
+[22:52:39.107] [2m../dist/public/[22m[2massets/[22m[36mindex-CeP_xkvV.js   [39m[1m[2m371.99 kB[22m[1m[22m[2m │ gzip: 116.34 kB[22m
+[22:52:39.107] [32m✓ built in 4.54s[39m
+[22:52:39.201] Build Completed in /vercel/output [16s]
+[22:52:39.228] Deploying outputs...
+[22:52:40.496] Deployment completed
+[22:52:55.058] Uploading build cache [85.01 MB]...
+[22:52:56.027] Build cache uploaded: 968.205ms
+[22:52:58.238] Exiting build container
