@@ -20,7 +20,7 @@ export function HomePage({
   onViewScience,
   onViewAbout
 }: HomePageProps) {
-  // Debug props on component render
+  // Debug props on component render (can be removed in production)
   console.log('HomePage props:', { onViewAbout: typeof onViewAbout, onViewScience: typeof onViewScience });
   return (
     <div className="max-w-md mx-auto p-4 space-y-6">
