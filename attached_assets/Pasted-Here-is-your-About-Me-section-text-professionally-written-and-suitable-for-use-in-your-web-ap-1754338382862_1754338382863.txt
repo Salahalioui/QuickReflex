@@ -1,0 +1,43 @@
+Here is your **“About Me”** section text, professionally written and suitable for use in your web app. It is written in a formal, credible tone for a multidisciplinary sports context:
+
+---
+
+### **About Me**
+
+**Dr. Salah**
+*Ph.D. in Sport Sciences – Elite Sports Training (2025)*
+*Researcher | Sports Technologist | Developer*
+
+I am a sport science researcher from El Bayadh, Algeria, with a doctoral specialization in elite athletic training. My academic and field experience spans multiple disciplines, including volleyball, soccer, and youth athletic development.
+
+This application was developed to bridge the gap between scientific research and real-world sports practice—particularly in under-resourced settings. It offers athletes and coaches an accessible, evidence-based platform for measuring and training reaction time using nothing more than standard smartphones and local connectivity.
+
+My work focuses on merging sports science with digital technology through low-cost, scalable solutions. This includes the integration of modern web technologies and AI (such as large language models like Gemini 2.5) to enhance testing, analysis, and personalized training feedback.
+
+Although inspired by practical needs in Algerian sport contexts, this tool is designed for multidisciplinary use in research, training, and performance optimization across various sports domains.
+
+---
+
+**Mission Statement**
+*Every athlete deserves access to valid, affordable performance tools—regardless of geography or funding.*
+
+---
+
+**Technical Interests**
+
+* Sport performance diagnostics
+* Cognitive-motor skill testing
+* Web-based applications for research and training
+* AI integration in sport science workflows
+
+---
+
+**Contact & Research Links** *(optional fields to add later)*
+
+* GitHub: *\[your username]*
+* Google Scholar / ORCID: *\[if available]*
+* Email: *\[[your@email.com](mailto:your@email.com)]*
+
+---
+
+Let me know if you want the same content as a **React component** or **Markdown/HTML file** to include directly in your app.

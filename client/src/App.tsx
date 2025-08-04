@@ -11,6 +11,7 @@ import { HomePage } from '@/pages/home';
 import { TestPage } from '@/pages/test';
 import { ResultsPage } from '@/pages/results';
 import { SciencePage } from '@/pages/science';
+import { AboutPage } from '@/pages/about';
 import { SettingsModal } from '@/components/settings-modal';
 import { PWAInstallPrompt } from '@/components/pwa-install-prompt';
 import { useLocalStorage } from '@/hooks/use-local-storage';
@@ -29,7 +30,7 @@ const defaultPersonalBest: PersonalBest = {
 };
 
 function Router() {
-  const [currentView, setCurrentView] = useState<'home' | 'test' | 'results' | 'science'>('home');
+  const [currentView, setCurrentView] = useState<'home' | 'test' | 'results' | 'science' | 'about'>('home');
   const [currentTestType, setCurrentTestType] = useState<TestType>('visual');
   const [currentSession, setCurrentSession] = useState<TestSession | null>(null);
   const [showSettings, setShowSettings] = useState(false);
@@ -112,6 +113,14 @@ function Router() {
     setCurrentView('home');
   };
 
+  const handleViewAbout = () => {
+    setCurrentView('about');
+  };
+
+  const handleBackFromAbout = () => {
+    setCurrentView('home');
+  };
+
   return (
     <div className="min-h-screen flex flex-col">
       {/* Header */}
@@ -139,6 +148,7 @@ function Router() {
             onStartTest={handleStartTest}
             onViewAllResults={handleViewAllResults}
             onViewScience={handleViewScience}
+            onViewAbout={handleViewAbout}
           />
         )}
         
@@ -162,6 +172,12 @@ function Router() {
         {currentView === 'science' && (
           <SciencePage
             onBack={handleBackFromScience}
+          />
+        )}
+        
+        {currentView === 'about' && (
+          <AboutPage
+            onBack={handleBackFromAbout}
           />
         )}
       </main>

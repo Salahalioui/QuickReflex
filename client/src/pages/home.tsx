@@ -1,4 +1,4 @@
-import { Eye, Volume2, ChevronRight, Timer, Trophy, Brain } from 'lucide-react';
+import { Eye, Volume2, ChevronRight, Timer, Trophy, Brain, User } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import { TestSession, PersonalBest, TestType } from '@/types/test';
@@ -9,6 +9,7 @@ interface HomePageProps {
   onStartTest: (type: TestType) => void;
   onViewAllResults: () => void;
   onViewScience: () => void;
+  onViewAbout: () => void;
 }
 
 export function HomePage({
@@ -16,7 +17,8 @@ export function HomePage({
   recentSessions,
   onStartTest,
   onViewAllResults,
-  onViewScience
+  onViewScience,
+  onViewAbout
 }: HomePageProps) {
   return (
     <div className="max-w-md mx-auto p-4 space-y-6">
@@ -99,6 +101,16 @@ export function HomePage({
         >
           <Brain size={16} />
           Scientific Background
+        </Button>
+        
+        <Button
+          data-testid="button-view-about"
+          onClick={onViewAbout}
+          variant="outline"
+          className="w-full bg-dark-surface hover:bg-dark-elevated border-dark-elevated text-text-primary font-medium py-3 px-6 rounded-xl transition-all duration-200 active:scale-95 flex items-center justify-center gap-2"
+        >
+          <User size={16} />
+          About the Developer
         </Button>
       </div>
 
