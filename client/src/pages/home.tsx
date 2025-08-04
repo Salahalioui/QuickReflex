@@ -20,6 +20,8 @@ export function HomePage({
   onViewScience,
   onViewAbout
 }: HomePageProps) {
+  // Debug props on component render
+  console.log('HomePage props:', { onViewAbout: typeof onViewAbout, onViewScience: typeof onViewScience });
   return (
     <div className="max-w-md mx-auto p-4 space-y-6">
       {/* Welcome Section */}
@@ -107,7 +109,12 @@ export function HomePage({
           data-testid="button-view-about"
           onClick={() => {
             console.log('About button clicked in HomePage');
-            onViewAbout();
+            console.log('onViewAbout function:', typeof onViewAbout, onViewAbout);
+            if (typeof onViewAbout === 'function') {
+              onViewAbout();
+            } else {
+              console.error('onViewAbout is not a function:', onViewAbout);
+            }
           }}
           variant="outline"
           className="w-full bg-dark-surface hover:bg-dark-elevated border-dark-elevated text-text-primary font-medium py-3 px-6 rounded-xl transition-all duration-200 active:scale-95 flex items-center justify-center gap-2"
