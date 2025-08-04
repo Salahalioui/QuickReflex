@@ -182,34 +182,42 @@ export function SciencePage({ onBack }: SciencePageProps) {
           <CardContent className="space-y-4">
             <div className="space-y-4">
               <div className="bg-dark-elevated rounded-lg p-4">
-                <h4 className="font-semibold mb-2">Randomized Intervals</h4>
+                <h4 className="font-semibold mb-2">Outlier Exclusion Protocol</h4>
                 <p className="text-sm text-secondary">
-                  Variable 1-3 second delays prevent anticipation and ensure true reaction 
-                  measurement rather than timing prediction.
+                  Following volleyball research, fastest and slowest trials are excluded 
+                  from averages to ensure reliable performance measurement.
                 </p>
               </div>
               
               <div className="bg-dark-elevated rounded-lg p-4">
-                <h4 className="font-semibold mb-2">Multi-Modal Training</h4>
+                <h4 className="font-semibold mb-2">Standard Trial Blocks</h4>
                 <p className="text-sm text-secondary">
-                  Training both visual and auditory pathways develops more robust, 
-                  sport-relevant reactive abilities.
+                  10-15 trials per session recommended by sports science research, 
+                  with proper warm-up and rest intervals.
                 </p>
               </div>
               
               <div className="bg-dark-elevated rounded-lg p-4">
-                <h4 className="font-semibold mb-2">Progressive Overload</h4>
+                <h4 className="font-semibold mb-2">Choice vs Simple RT</h4>
                 <p className="text-sm text-secondary">
-                  Starting with simple reactions and progressing to choice reactions 
-                  mirrors the complexity hierarchy of athletic performance.
+                  Choice reaction time (multiple response options) develops decision-making 
+                  under pressure, typically 50-100ms slower than simple RT.
                 </p>
               </div>
               
               <div className="bg-dark-elevated rounded-lg p-4">
-                <h4 className="font-semibold mb-2">Recovery & Adaptation</h4>
+                <h4 className="font-semibold mb-2">Warm-up Protocol</h4>
                 <p className="text-sm text-secondary">
-                  Adequate rest between trials prevents fatigue-induced degradation 
-                  and optimizes neuroplasticity.
+                  5-12 minute structured warm-up can improve reaction time by 40ms. 
+                  Includes joint mobility, neural activation, and practice trials.
+                </p>
+              </div>
+              
+              <div className="bg-dark-elevated rounded-lg p-4">
+                <h4 className="font-semibold mb-2">6-Week Training Programs</h4>
+                <p className="text-sm text-secondary">
+                  Research shows 10-15% reaction time improvements over structured 
+                  6-week programs with tech-enhanced training methods.
                 </p>
               </div>
             </div>

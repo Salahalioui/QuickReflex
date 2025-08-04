@@ -52,9 +52,10 @@ export function SettingsModal({
                 <SelectValue />
               </SelectTrigger>
               <SelectContent className="bg-dark-elevated border-dark-elevated">
-                <SelectItem value="3">3 trials</SelectItem>
-                <SelectItem value="5">5 trials</SelectItem>
-                <SelectItem value="10">10 trials</SelectItem>
+                <SelectItem value="5">5 trials (Quick)</SelectItem>
+                <SelectItem value="10">10 trials (Standard)</SelectItem>
+                <SelectItem value="15">15 trials (Research)</SelectItem>
+                <SelectItem value="20">20 trials (Extended)</SelectItem>
               </SelectContent>
             </Select>
           </div>

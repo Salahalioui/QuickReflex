@@ -17,7 +17,7 @@ import { TestType, TestSession, TestSettings, PersonalBest, TrialData, TestResul
 import { calculateSessionStats, updatePersonalBest } from '@/lib/test-utils';
 
 const defaultSettings: TestSettings = {
-  trialCount: 5,
+  trialCount: 10,  // Sports science recommended standard
   volume: 80,
   haptics: true
 };
@@ -62,7 +62,10 @@ function Router() {
       worst: stats.worst,
       consistency: stats.consistency,
       timestamp: Date.now(),
-      trialCount: settings.trialCount
+      trialCount: settings.trialCount,
+      validTrials: stats.validTrials,
+      excludedOutliers: stats.excludedOutliers,
+      warmupCompleted: true
     };
 
     // Update sessions

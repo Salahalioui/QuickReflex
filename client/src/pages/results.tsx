@@ -86,6 +86,17 @@ export function ResultsPage({ session, onTestAgain, onBackToHome }: ResultsPageP
               {getPerformanceInsight(session.average, session.type)}
             </div>
           </div>
+          
+          {/* Scientific Analysis */}
+          {session.excludedOutliers > 0 && (
+            <div className="bg-dark-elevated rounded-lg p-3 mt-3">
+              <h4 className="text-sm font-semibold mb-1">Scientific Analysis</h4>
+              <div className="text-xs text-secondary">
+                Following sports science protocols, {session.excludedOutliers} outlier trials were excluded from the average calculation. 
+                Final analysis based on {session.validTrials} valid trials.
+              </div>
+            </div>
+          )}
         </CardContent>
       </Card>
 

@@ -1,4 +1,4 @@
-import { TestSession, TestResult, PersonalBest } from '@/types/test';
+import { TestSession, TestResult, PersonalBest, TestType } from '@/types/test';
 
 export function calculateSessionStats(results: TestResult[]) {
   if (results.length === 0) {
@@ -6,18 +6,46 @@ export function calculateSessionStats(results: TestResult[]) {
       average: 0,
       best: 0,
       worst: 0,
-      consistency: 0
+      consistency: 0,
+      validTrials: 0,
+      excludedOutliers: 0
     };
   }
 
   const times = results.map(r => r.reactionTime);
-  const average = times.reduce((sum, time) => sum + time, 0) / times.length;
-  const best = Math.min(...times);
-  const worst = Math.max(...times);
+  
+  // Scientific protocol: Exclude fastest and slowest trials (outliers) before averaging
+  // This follows sports science best practices from volleyball research
+  let processedTimes = [...times];
+  let excludedCount = 0;
+  
+  if (times.length >= 5) {
+    // Sort to identify outliers
+    const sorted = [...times].sort((a, b) => a - b);
+    const fastest = sorted[0];
+    const slowest = sorted[sorted.length - 1];
+    
+    // Remove one instance each of fastest and slowest
+    processedTimes = times.filter((time, index) => {
+      if (time === fastest && excludedCount === 0) {
+        excludedCount++;
+        return false;
+      }
+      if (time === slowest && excludedCount === 1) {
+        excludedCount++;
+        return false;
+      }
+      return true;
+    });
+  }
+  
+  const average = processedTimes.reduce((sum, time) => sum + time, 0) / processedTimes.length;
+  const best = Math.min(...times); // Best from all trials
+  const worst = Math.max(...times); // Worst from all trials
   
   // Calculate consistency as the inverse of coefficient of variation
   const standardDeviation = Math.sqrt(
-    times.reduce((sum, time) => sum + Math.pow(time - average, 2), 0) / times.length
+    processedTimes.reduce((sum, time) => sum + Math.pow(time - average, 2), 0) / processedTimes.length
   );
   const coefficientOfVariation = standardDeviation / average;
   const consistency = Math.max(0, Math.min(100, (1 - coefficientOfVariation) * 100));
@@ -26,17 +54,32 @@ export function calculateSessionStats(results: TestResult[]) {
     average: Math.round(average),
     best: Math.round(best),
     worst: Math.round(worst),
-    consistency: Math.round(consistency)
+    consistency: Math.round(consistency),
+    validTrials: processedTimes.length,
+    excludedOutliers: excludedCount
   };
 }
 
-export function getPerformanceRating(reactionTime: number, type: 'visual' | 'auditory'): string {
+export function getPerformanceRating(reactionTime: number, type: TestType): string {
   // Evidence-based thresholds from volleyball research
   // Visual: Female setters avg 236ms, spikers avg 222ms
   // Auditory: Female setters avg 200ms, spikers avg 199ms
-  const thresholds = type === 'visual' 
-    ? { excellent: 220, good: 250, fair: 300 }  // Based on elite volleyball data
-    : { excellent: 180, good: 220, fair: 280 }; // Auditory advantage reflected
+  // Choice RT typically 50-100ms slower than simple RT
+  const isChoice = type.includes('choice');
+  const isAuditory = type.includes('auditory');
+  
+  let thresholds;
+  if (isChoice) {
+    // Choice reaction times are typically 50-100ms slower
+    thresholds = isAuditory 
+      ? { excellent: 250, good: 300, fair: 380 }  // Choice auditory
+      : { excellent: 280, good: 330, fair: 400 }; // Choice visual
+  } else {
+    // Simple reaction times
+    thresholds = isAuditory
+      ? { excellent: 180, good: 220, fair: 280 }  // Simple auditory
+      : { excellent: 220, good: 250, fair: 300 }; // Simple visual
+  }
 
   if (reactionTime <= thresholds.excellent) return 'Elite Level';
   if (reactionTime <= thresholds.good) return 'Competitive';
@@ -44,10 +87,20 @@ export function getPerformanceRating(reactionTime: number, type: 'visual' | 'aud
   return 'Needs Training';
 }
 
-export function getPerformanceColor(reactionTime: number, type: 'visual' | 'auditory'): string {
-  const thresholds = type === 'visual' 
-    ? { excellent: 220, good: 250, fair: 300 }
-    : { excellent: 180, good: 220, fair: 280 };
+export function getPerformanceColor(reactionTime: number, type: TestType): string {
+  const isChoice = type.includes('choice');
+  const isAuditory = type.includes('auditory');
+  
+  let thresholds;
+  if (isChoice) {
+    thresholds = isAuditory 
+      ? { excellent: 250, good: 300, fair: 380 }
+      : { excellent: 280, good: 330, fair: 400 };
+  } else {
+    thresholds = isAuditory
+      ? { excellent: 180, good: 220, fair: 280 }
+      : { excellent: 220, good: 250, fair: 300 };
+  }
 
   if (reactionTime <= thresholds.excellent) return 'text-green-400';
   if (reactionTime <= thresholds.good) return 'text-yellow-400';
@@ -55,19 +108,21 @@ export function getPerformanceColor(reactionTime: number, type: 'visual' | 'audi
   return 'text-red-400';
 }
 
-export function getPerformanceInsight(reactionTime: number, type: 'visual' | 'auditory'): string {
+export function getPerformanceInsight(reactionTime: number, type: TestType): string {
   const rating = getPerformanceRating(reactionTime, type);
-  const typeText = type === 'visual' ? 'visual' : 'auditory';
+  const isChoice = type.includes('choice');
+  const isAuditory = type.includes('auditory');
+  const testTypeText = `${isChoice ? 'choice ' : ''}${isAuditory ? 'auditory' : 'visual'}`;
   
   switch (rating) {
     case 'Elite Level':
-      return `Outstanding ${typeText} reaction time! You're performing at elite athlete levels.`;
+      return `Outstanding ${testTypeText} reaction time! You're performing at elite athlete levels.`;
     case 'Competitive':
-      return `Strong ${typeText} reaction time. You're in the competitive range.`;
+      return `Strong ${testTypeText} reaction time. You're in the competitive range.`;
     case 'Recreational':
-      return `Good ${typeText} reaction time for recreational play. Room for improvement.`;
+      return `Good ${testTypeText} reaction time for recreational play. Room for improvement.`;
     default:
-      return `Your ${typeText} reaction time has significant room for improvement with training.`;
+      return `Your ${testTypeText} reaction time has significant room for improvement with training.`;
   }
 }
 

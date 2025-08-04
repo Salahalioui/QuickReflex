@@ -1,4 +1,4 @@
-export type TestType = 'visual' | 'auditory';
+export type TestType = 'visual' | 'auditory' | 'choice-visual' | 'choice-auditory';
 
 export interface TestResult {
   id: string;
@@ -17,6 +17,9 @@ export interface TestSession {
   consistency: number;
   timestamp: number;
   trialCount: number;
+  validTrials: number;
+  excludedOutliers: number;
+  warmupCompleted?: boolean;
 }
 
 export interface TestSettings {
