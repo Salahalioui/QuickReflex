@@ -12,6 +12,7 @@ import { TestPage } from '@/pages/test';
 import { ResultsPage } from '@/pages/results';
 import { SciencePage } from '@/pages/science';
 import { SettingsModal } from '@/components/settings-modal';
+import { PWAInstallPrompt } from '@/components/pwa-install-prompt';
 import { useLocalStorage } from '@/hooks/use-local-storage';
 import { TestType, TestSession, TestSettings, PersonalBest, TrialData, TestResult } from '@/types/test';
 import { calculateSessionStats, updatePersonalBest } from '@/lib/test-utils';
@@ -175,6 +176,9 @@ function Router() {
       />
 
       <Toaster />
+      
+      {/* PWA Install Prompt */}
+      <PWAInstallPrompt />
     </div>
   );
 }

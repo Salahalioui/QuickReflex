@@ -51,8 +51,17 @@ Preferred communication style: Simple, everyday language.
 - **Modular Structure**: Clear separation between client, server, and shared code
 
 ### Application Features
-- **Reaction Testing**: Visual and auditory reaction time measurements
-- **Statistics Tracking**: Personal bests, session averages, and consistency metrics
-- **Settings Management**: Configurable trial counts, volume levels, and haptic feedback
-- **Data Export**: CSV export functionality for test results
-- **Performance Rating**: Categorized performance feedback based on reaction times
+- **Reaction Testing**: Visual and auditory reaction time measurements with choice reaction support
+- **Statistics Tracking**: Personal bests, session averages, consistency metrics, and scientific outlier exclusion
+- **Settings Management**: Configurable trial counts (5-20), volume levels, and haptic feedback
+- **Data Export**: CSV export functionality for test results with Web Share API
+- **Performance Rating**: Evidence-based categorized performance feedback from volleyball research
+- **PWA Support**: Full Progressive Web App with offline capabilities and installable experience
+- **Warm-up Protocol**: Scientific 4-stage warm-up sequence following sports science methodology
+
+### PWA Implementation
+- **Manifest**: Complete web app manifest with proper metadata and icons
+- **Service Worker**: Offline caching and background sync capabilities
+- **Install Prompt**: Native install prompt with user-friendly interface
+- **Mobile Optimization**: Touch-optimized interface with proper viewport settings
+- **Offline Ready**: Core functionality available without internet connection
