@@ -105,7 +105,10 @@ export function HomePage({
         
         <Button
           data-testid="button-view-about"
-          onClick={onViewAbout}
+          onClick={() => {
+            console.log('About button clicked in HomePage');
+            onViewAbout();
+          }}
           variant="outline"
           className="w-full bg-dark-surface hover:bg-dark-elevated border-dark-elevated text-text-primary font-medium py-3 px-6 rounded-xl transition-all duration-200 active:scale-95 flex items-center justify-center gap-2"
         >

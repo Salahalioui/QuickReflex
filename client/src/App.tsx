@@ -114,6 +114,7 @@ function Router() {
   };
 
   const handleViewAbout = () => {
+    console.log('About button clicked - navigating to about page');
     setCurrentView('about');
   };
 
