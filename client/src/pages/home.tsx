@@ -1,4 +1,4 @@
-import { Eye, Volume2, ChevronRight, Timer, Trophy, Brain, User } from 'lucide-react';
+import { Eye, Volume2, ChevronRight, Timer, Trophy, Brain, User, Zap, Target } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import { TestSession, PersonalBest, TestType } from '@/types/test';
@@ -91,6 +91,45 @@ export function HomePage({
           </div>
           <ChevronRight size={16} />
         </Button>
+
+        {/* Choice Reaction Tests */}
+        <div className="mt-4 pt-4 border-t border-dark-elevated">
+          <h4 className="text-sm font-medium text-secondary mb-3">Advanced Tests</h4>
+          
+          {/* Choice Visual Test */}
+          <Button
+            data-testid="button-start-choice-visual"
+            onClick={() => onStartTest('choice-visual')}
+            variant="outline"
+            className="w-full bg-dark-surface hover:bg-dark-elevated border-dark-elevated text-text-primary font-medium py-3 px-4 h-auto rounded-xl transition-all duration-200 active:scale-95 flex items-center justify-between mb-2"
+          >
+            <div className="flex items-center space-x-3">
+              <Zap size={18} />
+              <div className="text-left">
+                <div className="font-medium">Choice Visual Test</div>
+                <div className="text-xs text-secondary">Blue left, Green right</div>
+              </div>
+            </div>
+            <ChevronRight size={14} />
+          </Button>
+
+          {/* Choice Auditory Test */}
+          <Button
+            data-testid="button-start-choice-auditory"
+            onClick={() => onStartTest('choice-auditory')}
+            variant="outline"
+            className="w-full bg-dark-surface hover:bg-dark-elevated border-dark-elevated text-text-primary font-medium py-3 px-4 h-auto rounded-xl transition-all duration-200 active:scale-95 flex items-center justify-between"
+          >
+            <div className="flex items-center space-x-3">
+              <Target size={18} />
+              <div className="text-left">
+                <div className="font-medium">Choice Auditory Test</div>
+                <div className="text-xs text-secondary">High left, Low right</div>
+              </div>
+            </div>
+            <ChevronRight size={14} />
+          </Button>
+        </div>
       </div>
 
       {/* Scientific Background */}

@@ -13,6 +13,7 @@ import { ResultsPage } from '@/pages/results';
 import { SciencePage } from '@/pages/science';
 import { AboutPage } from '@/pages/about';
 import { AllResultsPage } from '@/pages/all-results';
+import { PreTestSetupPage } from '@/pages/pre-test-setup';
 import { SettingsModal } from '@/components/settings-modal';
 import { PWAInstallPrompt } from '@/components/pwa-install-prompt';
 import { useLocalStorage } from '@/hooks/use-local-storage';
@@ -31,7 +32,7 @@ const defaultPersonalBest: PersonalBest = {
 };
 
 function Router() {
-  const [currentView, setCurrentView] = useState<'home' | 'test' | 'results' | 'science' | 'about' | 'all-results'>('home');
+  const [currentView, setCurrentView] = useState<'home' | 'pre-test-setup' | 'test' | 'results' | 'science' | 'about' | 'all-results'>('home');
   const [currentTestType, setCurrentTestType] = useState<TestType>('visual');
   const [currentSession, setCurrentSession] = useState<TestSession | null>(null);
   const [showSettings, setShowSettings] = useState(false);
@@ -42,7 +43,7 @@ function Router() {
 
   const handleStartTest = (type: TestType) => {
     setCurrentTestType(type);
-    setCurrentView('test');
+    setCurrentView('pre-test-setup');
   };
 
   const handleTestComplete = (results: TrialData[]) => {
@@ -126,6 +127,18 @@ function Router() {
     setCurrentView('home');
   };
 
+  const handlePreTestSetupComplete = (isReady: boolean) => {
+    if (isReady) {
+      setCurrentView('test');
+    } else {
+      setCurrentView('home');
+    }
+  };
+
+  const handlePreTestSetupCancel = () => {
+    setCurrentView('home');
+  };
+
   return (
     <div className="min-h-screen flex flex-col">
       {/* Header */}
@@ -154,6 +167,14 @@ function Router() {
             onViewAllResults={handleViewAllResults}
             onViewScience={handleViewScience}
             onViewAbout={handleViewAbout}
+          />
+        )}
+        
+        {currentView === 'pre-test-setup' && (
+          <PreTestSetupPage
+            testType={currentTestType}
+            onComplete={handlePreTestSetupComplete}
+            onCancel={handlePreTestSetupCancel}
           />
         )}
         

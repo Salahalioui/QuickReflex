@@ -5,6 +5,9 @@ export interface TestResult {
   type: TestType;
   reactionTime: number;
   timestamp: number;
+  isValid?: boolean;
+  accuracy?: boolean; // For choice reaction tests
+  invalidReason?: 'too-early' | 'too-late' | 'wrong-response';
 }
 
 export interface TestSession {
@@ -40,4 +43,9 @@ export interface TrialData {
   reactionTime: number | null;
   startTime: number;
   stimulusTime: number;
+  isValid?: boolean;
+  accuracy?: boolean;
+  invalidReason?: 'too-early' | 'too-late' | 'wrong-response';
+  expectedResponse?: 'left' | 'right'; // For choice reactions
+  actualResponse?: 'left' | 'right';
 }
