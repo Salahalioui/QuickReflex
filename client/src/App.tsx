@@ -12,6 +12,7 @@ import { TestPage } from '@/pages/test';
 import { ResultsPage } from '@/pages/results';
 import { SciencePage } from '@/pages/science';
 import { AboutPage } from '@/pages/about';
+import { AllResultsPage } from '@/pages/all-results';
 import { SettingsModal } from '@/components/settings-modal';
 import { PWAInstallPrompt } from '@/components/pwa-install-prompt';
 import { useLocalStorage } from '@/hooks/use-local-storage';
@@ -30,7 +31,7 @@ const defaultPersonalBest: PersonalBest = {
 };
 
 function Router() {
-  const [currentView, setCurrentView] = useState<'home' | 'test' | 'results' | 'science' | 'about'>('home');
+  const [currentView, setCurrentView] = useState<'home' | 'test' | 'results' | 'science' | 'about' | 'all-results'>('home');
   const [currentTestType, setCurrentTestType] = useState<TestType>('visual');
   const [currentSession, setCurrentSession] = useState<TestSession | null>(null);
   const [showSettings, setShowSettings] = useState(false);
@@ -101,8 +102,7 @@ function Router() {
   };
 
   const handleViewAllResults = () => {
-    // TODO: Implement all results view
-    console.log('View all results');
+    setCurrentView('all-results');
   };
 
   const handleViewScience = () => {
@@ -119,6 +119,10 @@ function Router() {
   };
 
   const handleBackFromAbout = () => {
+    setCurrentView('home');
+  };
+
+  const handleBackFromAllResults = () => {
     setCurrentView('home');
   };
 
@@ -179,6 +183,13 @@ function Router() {
         {currentView === 'about' && (
           <AboutPage
             onBack={handleBackFromAbout}
+          />
+        )}
+        
+        {currentView === 'all-results' && (
+          <AllResultsPage
+            sessions={sessions}
+            onBack={handleBackFromAllResults}
           />
         )}
       </main>
