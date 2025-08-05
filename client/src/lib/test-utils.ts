@@ -25,13 +25,19 @@ export function calculateSessionStats(results: TestResult[]) {
     const fastest = sorted[0];
     const slowest = sorted[sorted.length - 1];
     
-    // Remove one instance each of fastest and slowest
-    processedTimes = times.filter((time, index) => {
-      if (time === fastest && excludedCount === 0) {
+    // Remove one instance each of fastest and slowest for statistical validity
+    // This follows sports science protocols used in volleyball research
+    let fastestRemoved = false;
+    let slowestRemoved = false;
+    
+    processedTimes = times.filter((time) => {
+      if (time === fastest && !fastestRemoved) {
+        fastestRemoved = true;
         excludedCount++;
         return false;
       }
-      if (time === slowest && excludedCount === 1) {
+      if (time === slowest && !slowestRemoved && time !== fastest) {
+        slowestRemoved = true;
         excludedCount++;
         return false;
       }
